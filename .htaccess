@@ -1,0 +1,18 @@
+# Apache Security Headers Configuration for Zenith TV
+
+<IfModule mod_headers.c>
+    # Security Headers
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-Content-Type-Options "nosniff"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' https://api.themoviedb.org https://api.jikan.moe; img-src 'self' data: https://image.tmdb.org https://placehold.co; frame-src 'self' https://vidsrc.to https://vidsrc.xyz https://embed.su; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"
+</IfModule>
+
+# Caching static content for high performance
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+</IfModule>

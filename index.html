@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script>
+    window.zenithConsoleErrors = [];
+    function sendErrorToDevServer(msg) {
+      fetch('/log_error?msg=' + encodeURIComponent(msg)).catch(() => {});
+    }
+    window.onerror = function(message, source, lineno, colno, error) {
+      const errText = 'ERR: ' + message + ' in ' + source + ' L:' + lineno + ' C:' + colno + (error ? ' STACK: ' + error.stack : '');
+      window.zenithConsoleErrors.push(errText);
+      localStorage.setItem('zenith_tv_console_errors', JSON.stringify(window.zenithConsoleErrors));
+      sendErrorToDevServer(errText);
+    };
+    const originalConsoleError = console.error;
+    console.error = function(...args) {
+      originalConsoleError.apply(console, args);
+      const msg = 'CONSOLE_ERR: ' + args.map(a => {
+        if (a instanceof Error) {
+          return a.message + '\n' + a.stack;
+        }
+        if (typeof a === 'object' && a !== null) {
+          if (a.message) return a.message;
+          try {
+            return JSON.stringify(a);
+          } catch (_) {
+            return String(a);
+          }
+        }
+        return String(a);
+      }).join(' ');
+      window.zenithConsoleErrors.push(msg);
+      localStorage.setItem('zenith_tv_console_errors', JSON.stringify(window.zenithConsoleErrors));
+      sendErrorToDevServer(msg);
+    };
+  </script>
+  
+  <!-- SEO Metadata -->
+  <title>SEFIANE Movies | مشاهدة الأفلام والمسلسلات والأنمي بجودة عالية مجاناً</title>
+  <meta name="description" content="منصة SEFIANE Movies هي بوابتك المجانية لمشاهدة أحدث الأفلام والمسلسلات والأنمي بجودة عالية وسرعة فائقة. استكشف تصنيفاتنا المميزة وتابع مشاهدتك من حيث توقفت.">
+  <meta name="keywords" content="أفلام مجانية, مسلسلات, أنمي مترجم, مشاهدة بجودة عالية, SEFIANE Movies, أفلام 2026, بث مباشر, استئناف المشاهدة">
+  <meta name="author" content="SEFIANE">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SEFIANE Movies | مشاهدة الأفلام والمسلسلات والأنمي بجودة عالية">
+  <meta property="og:description" content="بوابتك المجانية لمشاهدة أحدث الأفلام والمسلسلات والأنمي بجودة عالية وسرعة فائقة.">
+  <meta property="og:image" content="https://placehold.co/1200x630/0a0b0d/ff0055?text=SEFIANE+Movies">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="SEFIANE Movies | مشاهدة الأفلام والمسلسلات والأنمي">
+  <meta property="twitter:description" content="مشاهدة الأفلام والمسلسلات والأنمي بجودة عالية وسرعة فائقة مجاناً.">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://placehold.co/32x32/0a0b0d/ff0055?text=ZT">
+  
+  <!-- Google One Tap / Sign In SDK (Real OAuth) -->
+  <script>
+    window.ZENITH_GOOGLE_CLIENT_ID = '650111236030-ok0c84i857f4oircme8p67g2slq06o5d.apps.googleusercontent.com';
+    window.handleGoogleCredentialResponse = function(response) {
+      // Will be set by auth.js after it loads
+      if (window._zenithGoogleCallback) {
+        window._zenithGoogleCallback(response);
+      }
+    };
+  </script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  
+  <!-- Root App Container -->
+  <div id="app">
+    <!-- Navbar Container (Populated dynamically) -->
+    <div id="navbar-container"></div>
+    
+    <!-- Main Content Panel (Routes injection point) -->
+    <main id="main-content">
+      <!-- Loading Skeleton will be inserted here on init -->
+    </main>
+    
+    <!-- Footer Container (Populated dynamically) -->
+    <div id="footer-container"></div>
+
+    <!-- Bottom Navigation Bar (Visible only on mobile screen widths) -->
+    <div id="mobile-bottom-nav" class="mobile-nav-bar">
+      <a href="#/" class="mobile-nav-item" id="mob-nav-home">
+        <span class="mobile-nav-icon">🏠</span>
+        <span class="mobile-nav-label">الرئيسية</span>
+      </a>
+      <a href="#/browse" class="mobile-nav-item" id="mob-nav-browse">
+        <span class="mobile-nav-icon">🔍</span>
+        <span class="mobile-nav-label">تصفح</span>
+      </a>
+      <a href="#/watchlist" class="mobile-nav-item" id="mob-nav-watchlist">
+        <span class="mobile-nav-icon">❤️</span>
+        <span class="mobile-nav-label">مفضلتي</span>
+      </a>
+      <a href="#/profile" class="mobile-nav-item" id="mob-nav-profile">
+        <span class="mobile-nav-icon">👤</span>
+        <span class="mobile-nav-label">حسابي</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Entry Script (ES6 Modules) -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

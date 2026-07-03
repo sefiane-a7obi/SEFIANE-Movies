@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: sefiane-movies
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn server:app"
+    envVars:
+      - key: GOOGLE_CLIENT_ID
+        value: 650111236030-ok0c84i857f4oircme8p67g2slq06o5d.apps.googleusercontent.com
+      - key: GOOGLE_CLIENT_SECRET
+        value: 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

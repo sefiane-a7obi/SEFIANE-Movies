@@ -1,0 +1,11 @@
+# Ignore SQLite database
+users.db
+
+# Ignore Python bytecode
+__pycache__/
+*.pyc
+
+# Ignore local IDE/editor configurations
+.vscode/
+.idea/
+.DS_Store

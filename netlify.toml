@@ -1,0 +1,27 @@
+[[redirects]]
+  from = "/api/*"
+  to = "https://zenith-tv.onrender.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build]
+  publish = "."
+  command = "echo 'Static site - no build needed'"
+
+[build.environment]
+  GOOGLE_CLIENT_ID = "650111236030-ok0c84i857f4oircme8p67g2slq06o5d.apps.googleusercontent.com"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "autoplay=*, fullscreen=*"
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: *; frame-src *; media-src * blob: data:; img-src * data: blob:; font-src * data:; connect-src *;"
+
