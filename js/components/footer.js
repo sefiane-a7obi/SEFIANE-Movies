@@ -3,7 +3,8 @@ export const Footer = {
     return `
       <footer class="footer">
         <div class="container">
-          <div class="footer-logo">
+          <div class="footer-logo" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <img src="LOGO.png" alt="SEFIANE Movies Logo" style="height: 28px; width: 28px; object-fit: contain; border-radius: 4px;">
             <span class="rgb-text-animated">SEFIANE Movies</span>
           </div>
           <p class="footer-credits">
