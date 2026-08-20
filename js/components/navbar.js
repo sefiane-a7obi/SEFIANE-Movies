@@ -34,7 +34,8 @@ export const Navbar = {
       <nav class="navbar">
         <div class="container">
           <div class="nav-left">
-            <a href="#/" class="logo logo-glow">
+            <a href="#/" class="logo logo-glow" style="display: flex; align-items: center; gap: 10px;">
+              <img src="LOGO.png" alt="SEFIANE Movies Logo" style="height: 32px; width: 32px; object-fit: contain; border-radius: 6px;">
               <span class="rgb-text-animated">SEFIANE Movies</span>
             </a>
             <ul class="nav-menu" id="nav-menu">
