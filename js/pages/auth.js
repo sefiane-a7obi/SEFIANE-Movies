@@ -38,7 +38,7 @@ export const Auth = {
 
           <!-- Logo -->
           <div class="auth-logo-block">
-            <div class="auth-logo-icon">⚡</div>
+            <div class="auth-logo-icon"><img src="LOGO.png" alt="Logo" style="height: 48px; width: 48px; object-fit: contain; border-radius: 8px;"></div>
             <h1 class="auth-logo-text"><span class="rgb-text-animated">SEFIANE Movies</span></h1>
             <p class="auth-logo-sub" id="auth-subtitle">${this.getSubtitle()}</p>
           </div>
